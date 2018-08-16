@@ -4,17 +4,24 @@ import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
+#import the glade file
+builder = Gtk.Builder()
+builder.add_from_file("datatransfer.glade")
+
+#class for name entry (both button click and enter)
 class Handler:
     def name_enter(self, button):
         print ("Hello world")
-builder = Gtk.Builder()
-builder.add_from_file("datatransfer.glade")
+
 builder.connect_signals(Handler())
 
 nameokbutton = builder.get_object("nameokbutton")
 window = builder.get_object("window")
+namedialog = builder.get_object("namedialog")
 
-"""class MyWindow(Gtk.Window):
+
+"""Old code
+class MyWindow(Gtk.Window):
     def __init__(self):
         Gtk.Window.__init__(self, title="Data Transfer", default-height=300, default-width=500)
 #        self.box = Gtk.Box(spacing=0)
