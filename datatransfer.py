@@ -4,12 +4,24 @@ import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
-class MyWindow(Gtk.Window):
+class Handler:
+    def name_enter(self, button):
+        print ("Hello world")
+builder = Gtk.Builder()
+builder.add_from_file("datatransfer.glade")
+builder.connect_signals(Handler())
+
+nameokbutton = builder.get_object("nameokbutton")
+window = builder.get_object("window")
+
+"""class MyWindow(Gtk.Window):
     def __init__(self):
-        Gtk.Window.__init__(self, title="Hello World")
-        self.box = Gtk.Box(spacing=0)
+        Gtk.Window.__init__(self, title="Data Transfer", default-height=300, default-width=500)
+#        self.box = Gtk.Box(spacing=0)
 #        self.add(self.box)
-        self.grid = Gtk.Grid()
+#        self.orient = Gtk.Orientation(0)
+#        self.orient(1)
+        self.grid = Gtk.Grid(orientation=Gtk.Orientation.VERTICAL)
 
         self.text = Gtk.Entry()
 #        self.add(self.text)
@@ -27,9 +39,8 @@ class MyWindow(Gtk.Window):
         self.add(self.grid)
 
     def on_button_clicked(self, button):
-        print("Hello World")
+        print("Hello World")"""
 
-window = MyWindow()
 window.connect("destroy", Gtk.main_quit)
 window.show_all()
 Gtk.main()
