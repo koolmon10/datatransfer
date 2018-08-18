@@ -4,11 +4,18 @@ import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 from subprocess import call
-import os
+import sys
+
 builder = Gtk.Builder()
 builder.add_from_file("datatransfer.glade")
 
-devname = os.environ 
+if len(sys.argv) == 2:
+    devname = sys.argv[1]
+    print ("devname (python) = "+ devname)
+else:
+    print("Error: no device specified")
+    sys.exit()
+
 #get widgets from the builder
 nameokbutton = builder.get_object("nameokbutton")
 nameentry = builder.get_object("nameentry")
@@ -17,7 +24,7 @@ namedialog = builder.get_object("namedialog")
 
 #class to interact with the data
 def get_size():
-    call(["./getsize.sh"])
+    call(["./disk.sh", devname])
 
 #class for name entry (both button click and enter)
 class Handler:
