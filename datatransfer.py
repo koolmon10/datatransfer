@@ -4,9 +4,11 @@ import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 from subprocess import call
+import os
 builder = Gtk.Builder()
 builder.add_from_file("datatransfer.glade")
 
+devname = os.environ 
 #get widgets from the builder
 nameokbutton = builder.get_object("nameokbutton")
 nameentry = builder.get_object("nameentry")
