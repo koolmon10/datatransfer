@@ -21,30 +21,32 @@ else:
 nameokbutton = builder.get_object("nameokbutton")
 nameentry = builder.get_object("nameentry")
 window = builder.get_object("window")
-namedialog = builder.get_object("namedialog")
 
 #functions
-def is_path(path):
+def message(parent, message): #message dialog box
+    dialog = Gtk.MessageDialog(parent, 0, Gtk.MessageType.INFO,
+        Gtk.ButtonsType.OK, message)
+    dialog.run()
+    dialog.destroy()
+        
+def is_path(path): #checks if a string is a valid path and if that path is a directory or not
     if os.path.exists(path) == True:
         if os.path.isdir(path) == True:
-            print ("Path is a directory")
+            message(window, "A winner is you!")
         else:
-            print ("Error: path is not a directory")
+            message(window, "Error: path is not a directory")
     else:
-        print ("Error: path does not exist")
+        message(window, "Error: path does not exist")
 
-dirname = ""
-def get_size():
+def get_size(dirname):
     call(["./disk.sh", "--get-size", dirname])
 
 #class for name entry (both button click and enter)
 class Handler:
     def name_enter(self, button):
         name = nameentry.get_text()
-        print (name)
         is_path(name)
 
-get_size()
 builder.connect_signals(Handler())
 
 window.connect("destroy", Gtk.main_quit)
