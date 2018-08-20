@@ -1,2 +1,2 @@
-# python
-Repository for simple Python apps for learning and development
+# datatransfer
+Utility to automate data transfers for computer repairs. Uses Python and shell scripts.
